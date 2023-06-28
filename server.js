@@ -6,7 +6,7 @@ const app = express();
 const sequelize = require('./config');
 const PORT = process.env.PORT || 3001;
 
-let routes = require('./routes/api/routes');
+let routes = require('./routes/api');
 
 app.use(
     cors({
