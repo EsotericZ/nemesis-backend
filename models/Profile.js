@@ -14,13 +14,6 @@ Profile.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        user_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'users',
-                key: 'id',
-            }
-        },
     }, {
         sequelize,
         tableName: 'profiles',
