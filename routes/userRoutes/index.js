@@ -5,5 +5,6 @@ const userController = require('../../controllers/userController');
 // router.get('/getAllUsers', verify, userController.getAllUsers);
 
 router.get('/getAllUsers', userController.getAllUsers);
+router.post('/getSocialEmail', userController.getSocialEmail);
 
 module.exports = router;
