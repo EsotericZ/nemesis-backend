@@ -50,13 +50,14 @@ async function login(req, res) {
             const accessToken = jwt.sign(
                 { "email": userInfo.email },
                 process.env.JWT_ACCESS_SECRET_KEY || '5678',
-                { expiresIn: '30s' }
+                { expiresIn: '30m' }
             )
             const refreshToken = jwt.sign(
                 { "email": userInfo.email },
                 process.env.JWT_REFRESH_SECRET_KEY || '9012',
                 { expiresIn: '7d' }
             );
+            res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24*60*60*1000 });
             return res.status(200).json({
                 status: 'success',
                 accessToken: accessToken,
@@ -72,6 +73,6 @@ async function login(req, res) {
 }
 
 module.exports = {
-    getSocialEmail: getSocialEmail,
-    login: login,
+    getSocialEmail,
+    login,
 }

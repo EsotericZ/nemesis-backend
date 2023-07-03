@@ -34,6 +34,6 @@ async function getSocialEmail(req, res) {
 }
 
 module.exports = {
-    getAllUsers: getAllUsers,
-    getSocialEmail: getSocialEmail,
+    getAllUsers,
+    getSocialEmail,
 }
