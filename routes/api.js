@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const portalRoutes = require('./portalRoutes');
 const userRoutes = require('./userRoutes');
 
 router.get('/', (req, res) => {
@@ -7,5 +8,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/users', userRoutes);
+router.use('/portal', portalRoutes);
 
 module.exports = router;
