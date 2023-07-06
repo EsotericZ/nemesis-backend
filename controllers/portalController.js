@@ -24,9 +24,10 @@ async function getSocialEmail(req, res) {
 }
 
 async function login(req, res) {
-    let email = req.body.email
-    let password = req.body.password
-    console.log(email, password)
+    let email = req.body.email;
+    let password = req.body.password;
+    let roles = ['player'];
+    console.log(email, password);
 
     const userInfo = await User.findOne({
         where: { email: email},
@@ -34,6 +35,11 @@ async function login(req, res) {
             model: Profile,
         }]
     });
+
+    if (userInfo.role == 'admin') {
+        roles.push('admin')
+    }
+    console.log(roles)
 
     if (!userInfo) {
         return res.status(405).json({
@@ -48,7 +54,7 @@ async function login(req, res) {
         const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
         if (decryptedPassword === password) {
             const accessToken = jwt.sign(
-                { "email": userInfo.email },
+                { "email": userInfo.email},
                 process.env.JWT_ACCESS_SECRET_KEY || '5678',
                 { expiresIn: '30m' }
             )
@@ -61,7 +67,7 @@ async function login(req, res) {
             return res.status(200).json({
                 status: 'success',
                 accessToken: accessToken,
-                roles: userInfo.role,
+                roles: roles,
             });
         } else {
             return res.status(405).json({
