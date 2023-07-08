@@ -1,5 +1,11 @@
 const seedUsers = require('./userSeeds');
 const seedProfiles = require('./profileSeeds');
+const seedTournaments = require('./tournamentSeeds');
+
+const { UserTournament } = require('../models');
+const { Division } = require('../models');
+const { Match } = require('../models');
+const { WeightIndex } = require('../models');
 
 const sequelize = require('../config');
 
@@ -12,6 +18,9 @@ const seedAll = async () => {
 
     await seedProfiles();
     console.log('\n----- PROFILES SEEDED -----\n');
+
+    await seedTournaments();
+    console.log('\n----- TOURNAMENTS SEEDED -----\n');
 
     process.exit(0);
 }

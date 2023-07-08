@@ -3,11 +3,19 @@ const { Profile } = require('../models');
 const profileData = [
     {
         name: 'CJ Sanders',
-        UserId: 123,
+        UserId: 1001,
     },
     {
-        name: 'Test Player',
-        UserId: 456,
+        name: 'Victor',
+        UserId: 1002,
+    },
+    {
+        name: 'Nick',
+        UserId: 1003,
+    },
+    {
+        name: 'Charles',
+        UserId: 1004,
     },
 ]
 
