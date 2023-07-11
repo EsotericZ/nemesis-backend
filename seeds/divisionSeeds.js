@@ -4,27 +4,37 @@ const divisionData = [
     {
         id: 5001,
         name: 'Open Singles',
-        TournamentId: 3001,
+        TournamentId: 4001,
     },
     {
         id: 5002,
         name: 'A Singles',
-        TournamentId: 3001,
+        TournamentId: 4001,
     },
     {
         id: 5003,
-        name: 'B/C Singles',
-        TournamentId: 3001,
+        name: 'B Singles',
+        TournamentId: 4001,
     },
     {
         id: 5004,
-        name: 'Open Doubles',
-        TournamentId: 3001,
+        name: 'C Singles',
+        TournamentId: 4001,
     },
     {
         id: 5005,
-        name: 'A/B Doubles',
-        TournamentId: 3001,
+        name: 'Open Doubles',
+        TournamentId: 4001,
+    },
+    {
+        id: 5006,
+        name: 'A Doubles',
+        TournamentId: 4001,
+    },
+    {
+        id: 5007,
+        name: 'B Doubles',
+        TournamentId: 4001,
     },
 ]
 

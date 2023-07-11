@@ -2,7 +2,7 @@ const { Tournament } = require('../models');
 
 const tournamentData = [
     {
-        id: 3001,
+        id: 4001,
         name: 'DAC Shootout',
         club: 'DAC',
         startDate: '07/15',
