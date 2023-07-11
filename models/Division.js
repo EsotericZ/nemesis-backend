@@ -17,6 +17,7 @@ Division.init(
         sequelize,
         tableName: 'divisions',
         modelName: 'Division',
+        timestamps: false,
     }
 );
 

@@ -14,10 +14,17 @@ Profile.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        singleRank: {
+            type: DataTypes.INTEGER,
+        },
+        doubleRank: {
+            type: DataTypes.INTEGER,
+        },
     }, {
         sequelize,
         tableName: 'profiles',
         modelName: 'Profile',
+        timestamps: false,
     }
 );
 

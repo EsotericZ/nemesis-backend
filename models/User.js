@@ -12,8 +12,8 @@ User.init(
         },
         email: {
             type: DataTypes.STRING,
-            unique: true,
-            allowNull: false,
+            // unique: true,
+            // allowNull: false,
         },
         password: {
             type: DataTypes.STRING,
@@ -31,6 +31,7 @@ User.init(
         sequelize,
         tableName: 'users',
         modelName: 'User',
+        timestamps: false,
     }
 );
 
