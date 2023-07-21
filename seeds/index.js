@@ -3,6 +3,7 @@ const seedParticipants = require('./participantSeeds');
 const seedProfiles = require('./profileSeeds');
 const seedTournaments = require('./tournamentSeeds');
 const seedDivisions = require('./divisionSeeds');
+const seedFormats = require('./formatSeeds');
 
 const { Match } = require('../models');
 const { WeightIndex } = require('../models');
@@ -19,6 +20,9 @@ const seedAll = async () => {
     await seedProfiles();
     console.log('\n----- PROFILES SEEDED -----\n');
 
+    await seedFormats();
+    console.log('\n----- FORMATS SEEDED -----\n');
+
     await seedTournaments();
     console.log('\n----- TOURNAMENTS SEEDED -----\n');
 
@@ -27,6 +31,7 @@ const seedAll = async () => {
 
     await seedParticipants();
     console.log('\n----- PARTICIPANTS SEEDED -----\n');
+
 
     process.exit(0);
 }

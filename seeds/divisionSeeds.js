@@ -5,6 +5,7 @@ const divisionData = [
         id: 5001,
         name: 'Open Singles',
         TournamentId: 4001,
+        FormatId: 8001,
     },
     {
         id: 5002,
