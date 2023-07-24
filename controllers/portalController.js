@@ -27,7 +27,7 @@ async function login(req, res) {
     let email = req.body.email;
     let password = req.body.password;
     let roles = ['player'];
-    console.log(email, password);
+    console.log('hit')
 
     const userInfo = await User.findOne({
         where: { email: email},
@@ -39,7 +39,6 @@ async function login(req, res) {
     if (userInfo.role == 'admin') {
         roles.push('admin')
     }
-    console.log(roles)
 
     if (!userInfo) {
         return res.status(405).json({
@@ -63,7 +62,7 @@ async function login(req, res) {
                 process.env.JWT_REFRESH_SECRET_KEY || '9012',
                 { expiresIn: '7d' }
             );
-            res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24*60*60*1000 });
+            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000 });
             return res.status(200).json({
                 status: 'success',
                 accessToken: accessToken,
@@ -78,7 +77,32 @@ async function login(req, res) {
     }
 }
 
+const refreshToken = (req, res) => {
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(401);
+    const refreshToken = cookies.jwt;
+
+    console.log('hit')
+    // const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken);
+    // if (!foundUser) return res.sendStatus(403); //Forbidden 
+    // // evaluate jwt 
+    // jwt.verify(
+    //     refreshToken,
+    //     process.env.REFRESH_TOKEN_SECRET,
+    //     (err, decoded) => {
+    //         if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
+    //         const accessToken = jwt.sign(
+    //             { "username": decoded.username },
+    //             process.env.ACCESS_TOKEN_SECRET,
+    //             { expiresIn: '30s' }
+    //         );
+    //         res.json({ accessToken })
+    //     }
+    // );
+}
+
 module.exports = {
     getSocialEmail,
     login,
+    refreshToken,
 }

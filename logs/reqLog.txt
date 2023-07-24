@@ -53,3 +53,7 @@
 20230703	16:26:24	c523a508-391a-4db6-85f7-7b1eb3cd1a9a	POST	http://localhost:3000	/portal/login
 20230703	16:26:34	c96ddc9d-c3de-4fb1-9e4d-04717002bcda	OPTIONS	http://localhost:3000	/portal/login
 20230703	16:26:34	0ad649f8-ebf4-43c0-bf34-443091e47b27	POST	http://localhost:3000	/portal/login
+20230723	19:35:31	2ed9e89b-1e54-4a16-ac49-c3769e62dfd8	OPTIONS	http://localhost:3000	/portal/login
+20230723	19:35:31	6267d40b-4015-4b90-92ff-b3f534511078	POST	http://localhost:3000	/portal/login
+20230723	19:37:16	44218fec-1498-47e0-b90e-37dede70446f	OPTIONS	http://localhost:3000	/portal/login
+20230723	19:37:16	2ca35f24-ccb6-42b8-afee-c3d363ef90c2	POST	http://localhost:3000	/portal/login
