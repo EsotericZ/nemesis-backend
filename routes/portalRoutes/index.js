@@ -3,6 +3,6 @@ const portalController = require('../../controllers/portalController');
 
 router.post('/getSocialEmail', portalController.getSocialEmail);
 router.post('/login', portalController.login);
-router.post('/refresh', portalController.refreshToken);
+router.get('/refresh', portalController.refreshToken);
 
 module.exports = router;

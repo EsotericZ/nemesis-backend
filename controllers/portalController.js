@@ -36,6 +36,9 @@ async function login(req, res) {
         }]
     });
 
+    let id = userInfo.id;
+    console.log(id)
+
     if (userInfo.role == 'admin') {
         roles.push('admin')
     }
@@ -60,8 +63,14 @@ async function login(req, res) {
             const refreshToken = jwt.sign(
                 { "email": userInfo.email },
                 process.env.JWT_REFRESH_SECRET_KEY || '9012',
-                { expiresIn: '7d' }
+                { expiresIn: '1d' }
             );
+            await User.update(
+                {
+                    refreshToken
+                },
+                { where: { id: id }}
+            )
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000 });
             return res.status(200).json({
                 status: 'success',
@@ -79,26 +88,27 @@ async function login(req, res) {
 
 const refreshToken = (req, res) => {
     const cookies = req.cookies;
+    console.log(cookies);
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
-
-    console.log('hit')
-    // const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken);
-    // if (!foundUser) return res.sendStatus(403); //Forbidden 
-    // // evaluate jwt 
-    // jwt.verify(
-    //     refreshToken,
-    //     process.env.REFRESH_TOKEN_SECRET,
-    //     (err, decoded) => {
-    //         if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
-    //         const accessToken = jwt.sign(
-    //             { "username": decoded.username },
-    //             process.env.ACCESS_TOKEN_SECRET,
-    //             { expiresIn: '30s' }
-    //         );
-    //         res.json({ accessToken })
-    //     }
-    // );
+    
+    const foundUser = User.findOne({
+        where: { refreshToken: refreshToken},
+    });
+    if (!foundUser) return res.sendStatus(403);
+    jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET || '2626',
+        (err, decoded) => {
+            if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
+            const accessToken = jwt.sign(
+                { "email": decoded.email },
+                process.env.ACCESS_TOKEN_SECRET || '1515',
+                { expiresIn: '30s' }
+            );
+            res.json({ accessToken })
+        }
+    );
 }
 
 module.exports = {

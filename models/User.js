@@ -26,7 +26,10 @@ User.init(
         active: {
             type: DataTypes.BOOLEAN,
             defaultValue: true,
-        }
+        },
+        refreshToken: {
+            type: DataTypes.STRING,
+        },
     }, {
         sequelize,
         tableName: 'users',
