@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const userController = require('../../controllers/userController');
-const verify = require('../../middleware/verifyJWT');
+const ROLES = require('../../config/roles');
+const verifyRoles = require('../../middleware/verifyRoles');
 
-// router.get('/getAllUsers', verify, userController.getAllUsers);
-router.get('/getAllUsers', userController.getAllUsers);
-router.post('/getSocialEmail', userController.getSocialEmail);
+router.route('/')
+    .get(userController.getAllUsers);
+    // .get(verifyRoles(ROLES.admin), userController.getAllUsers);
 
 module.exports = router;

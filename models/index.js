@@ -4,11 +4,11 @@ const Match = require('./Match');
 const Participant = require('./Participant');
 const Profile = require('./Profile');
 const Tournament = require('./Tournament');
-const User = require('./User');
+// const User = require('./User');
 const WeightIndex = require('./WeightIndex');
 
-User.hasOne(Profile);
-Profile.belongsTo(User);
+// User.hasOne(Profile);
+// Profile.belongsTo(User);
 
 Profile.hasOne(Participant);
 Participant.belongsTo(Profile);
@@ -45,6 +45,6 @@ module.exports = {
     Participant,
     Profile,
     Tournament,
-    User,
+    // User,
     WeightIndex,
 }

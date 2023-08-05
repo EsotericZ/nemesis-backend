@@ -1,88 +1,58 @@
-const { Profile, User } = require('../models');
+// const { Profile, User } = require('../models');
+const User = require('../models/User');
 
-const CryptoJS = require('crypto-js');
+const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
 
-async function getSocialEmail(req, res) {
-    let email = req.body.email
-    await User.findOne({
-        where: { email: email},
-        include: [{
-            model: Profile,
-        }]
-    })
-    .then((results) => {
-        return res.status(200).send({
-            data: results
-        })
-    }).catch((err) => {
-        return res.status(500).send({
-            status: err
-        })
-    })
-}
+// async function getSocialEmail(req, res) {
+//     let email = req.body.email
+//     await User.findOne({
+//         where: { email: email},
+//         include: [{
+//             model: Profile,
+//         }]
+//     })
+//     .then((results) => {
+//         return res.status(200).send({
+//             data: results
+//         })
+//     }).catch((err) => {
+//         return res.status(500).send({
+//             status: err
+//         })
+//     })
+// }
 
-async function login(req, res) {
-    let email = req.body.email;
-    let password = req.body.password;
-    let roles = ['player'];
-    console.log('hit')
+const login = async (req, res) => {
+    const { email, password } = req.body; 
 
-    const userInfo = await User.findOne({
-        where: { email: email},
-        include: [{
-            model: Profile,
-        }]
-    });
+    const userFound = await User.findOne({ email: email }).exec();
+    if (!userFound) return res.sendStatus(401);
 
-    let id = userInfo.id;
-    console.log(id)
-
-    if (userInfo.role == 'admin') {
-        roles.push('admin')
-    }
-
-    if (!userInfo) {
-        return res.status(405).json({
-            status: 'error',
-            description: 'User Does Not Exist'
-        });
-    } else {
-        const bytes = CryptoJS.AES.decrypt(
-            userInfo.password,
-            process.env.SECRET_KEY || '1234'
+    const passwordCheck = await bcrypt.compare(password, userFound.password);
+    if (passwordCheck) {
+        const roles = Object.values(userFound.roles).filter(Boolean);
+        const accessToken = jwt.sign(
+            {
+                "userInfo": {
+                    "email": userFound.email,
+                    "roles": roles
+                }
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '10s' }
         );
-        const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
-        if (decryptedPassword === password) {
-            const accessToken = jwt.sign(
-                { "email": userInfo.email},
-                process.env.JWT_ACCESS_SECRET_KEY || '5678',
-                { expiresIn: '30m' }
-            )
-            const refreshToken = jwt.sign(
-                { "email": userInfo.email },
-                process.env.JWT_REFRESH_SECRET_KEY || '9012',
-                { expiresIn: '1d' }
-            );
-            await User.update(
-                {
-                    refreshToken
-                },
-                { where: { id: id }}
-            )
-            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000 });
-            return res.status(200).json({
-                status: 'success',
-                accessToken: accessToken,
-                roles: roles,
-            });
-        } else {
-            return res.status(405).json({
-                status: 'error',
-                description: 'Failed to Login'
-            });
-        }
+        const refreshToken = jwt.sign(
+            { "email": userFound.email, },
+            process.env.REFRESH_TOKEN_SECRET,
+            { expiresIn: '1d' }
+        );
+        userFound.refreshToken = refreshToken;
+        await userFound.save();
+        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+        res.json({ roles, accessToken });
+    } else {
+        res.sendStatus(401);
     }
 }
 
@@ -113,7 +83,7 @@ const refreshToken = (req, res) => {
 }
 
 module.exports = {
-    getSocialEmail,
+    // getSocialEmail,
     login,
     refreshToken,
 }
