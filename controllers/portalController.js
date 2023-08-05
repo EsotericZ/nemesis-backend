@@ -88,6 +88,7 @@ async function login(req, res) {
 
 const refreshToken = (req, res) => {
     const cookies = req.cookies;
+    console.log('hit')
     console.log(cookies);
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;

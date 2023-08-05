@@ -92,3 +92,12 @@
 20230728	20:56:30	5f7d7dcb-0a91-40f4-9cb9-919a0efec758	GET	http://localhost:3000	/portal/refresh
 20230728	20:56:58	a75fe15e-a062-4350-bd21-505cb21ebeeb	GET	http://localhost:3000	/portal/refresh
 20230728	21:01:13	66fb4d62-c81d-4519-93a7-bb5eeecee392	GET	http://localhost:3000	/portal/refresh
+20230729	21:48:29	ec4018a9-867a-4fe8-b20d-ef7d2fa0e78c	OPTIONS	http://localhost:3000	/portal/login
+20230729	21:48:29	e68fe850-6da8-4f6e-85e5-68eb1a90f631	POST	http://localhost:3000	/portal/login
+20230729	21:48:32	d9ef61f4-09e8-4505-ad79-11084b00f9ab	GET	http://localhost:3000	/portal/refresh
+20230729	21:48:40	4b268111-e881-4c01-877b-eccc1ca8f150	GET	http://localhost:3000	/portal/refresh
+20230729	21:52:05	d603e9cc-3126-42ac-9139-d515bdd808e7	GET	http://localhost:3000	/portal/refresh
+20230729	21:55:26	ebc962fb-2626-4b9b-938f-06fc3120f186	GET	undefined	/users/getAllUsers
+20230729	21:58:39	4a5328d9-5464-4610-b9fe-bfc44c3ea8ed	GET	http://localhost:3000	/portal/refresh
+20230729	22:00:01	a31282c0-2893-4f36-9e0d-35237315c9e0	GET	http://localhost:3000	/portal/refresh
+20230729	22:00:35	2fee758a-da87-4fb8-a986-8af4b690af70	GET	http://localhost:3000	/portal/refresh

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 // const path = require('path');
 const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
 // corsOptions?
 const { logger } = require('./middleware/logger');
 // errorHandler?
@@ -22,13 +23,14 @@ let routes = require('./routes/api');
 app.use(logger);
 app.use(credentials);
 
-app.use(
-    cors({
-        origin: true,
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        credentials: true,
-    })
-);
+// app.use(
+//     cors({
+//         origin: true,
+//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//         credentials: true,
+//     })
+// );
+app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
