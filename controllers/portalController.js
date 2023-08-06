@@ -35,6 +35,24 @@ const login = async (req, res) => {
     }
 }
 
+const logout = async (req, res) => {
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(204);
+    const refreshToken = cookies.jwt;
+
+    const userFound = await User.findOne({ refreshToken }).exec();
+    if (userFound) {
+        res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None'})
+        return res.sendStatus(204);
+    }
+
+    userFound.refreshToken = '';
+    await userFound.save();
+
+    res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None'});
+    res.sendStatus(204);
+}
+
 const refreshToken = async (req, res) => {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
@@ -84,6 +102,7 @@ const register = async (req, res) => {
 
 module.exports = {
     login,
+    logout,
     refreshToken,
     register,
 }
