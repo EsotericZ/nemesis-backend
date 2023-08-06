@@ -626,3 +626,16 @@
 20230806	08:51:33	d768c81a-b297-4030-9f1c-ba2cea0115be	GET	http://localhost:3000	/portal/refresh
 20230806	08:51:33	3793f367-aedf-4420-9f4e-c8cff62d5e26	GET	http://localhost:3000	/users
 20230806	08:51:42	c51fd718-d08b-4f69-b37a-bae33ee5f7bc	GET	http://localhost:3000	/portal/refresh
+20230806	09:05:15	3f8b925c-4be5-4710-b124-fb24dd6691d8	OPTIONS	http://localhost:3000	/portal/login
+20230806	09:05:15	4090e016-e04c-4261-a13e-3a7a168b2d1f	POST	http://localhost:3000	/portal/login
+20230806	09:05:16	696c4246-f525-4abc-b6ca-e45bc324f03a	OPTIONS	http://localhost:3000	/users
+20230806	09:05:16	600b1e45-e886-4d3b-92e9-26c24e2d80db	GET	http://localhost:3000	/users
+20230806	09:05:18	dcd53601-88e2-4300-b13e-cb9bc94f295f	GET	http://localhost:3000	/portal/refresh
+20230806	09:05:18	199c8c87-b403-4c3a-bd68-60a5bd8ffc9b	GET	http://localhost:3000	/users
+20230806	09:05:22	5be4a579-ae8c-4ead-94a1-b4786de4ad2d	GET	http://localhost:3000	/portal/logout
+20230806	09:05:32	404c77f9-de02-4e43-b61b-622f33ad2c80	OPTIONS	http://localhost:3000	/portal/login
+20230806	09:05:32	ac2baf41-496b-4d2a-b9e7-b16c6209c942	POST	http://localhost:3000	/portal/login
+20230806	09:05:38	e9da10fc-6255-4a4c-854e-775575154803	GET	http://localhost:3000	/portal/refresh
+20230806	09:07:42	b2416102-7663-4b27-8dc0-3db341f60e30	OPTIONS	http://localhost:3000	/portal/login
+20230806	09:07:42	6e6892d5-2403-4463-a96e-bc9961eece5c	POST	http://localhost:3000	/portal/login
+20230806	09:07:46	dc3ee27a-169e-40c6-bd5c-8d6b6cf3b0ec	GET	http://localhost:3000	/portal/refresh
