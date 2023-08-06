@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
     const { email, password } = req.body; 
-    console.log(email, password);
 
     const userFound = await User.findOne({ email: email }).exec();
     if (!userFound) return res.sendStatus(401);
