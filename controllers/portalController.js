@@ -1,30 +1,10 @@
-// const { Profile, User } = require('../models');
 const User = require('../models/User');
-
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
-// async function getSocialEmail(req, res) {
-//     let email = req.body.email
-//     await User.findOne({
-//         where: { email: email},
-//         include: [{
-//             model: Profile,
-//         }]
-//     })
-//     .then((results) => {
-//         return res.status(200).send({
-//             data: results
-//         })
-//     }).catch((err) => {
-//         return res.status(500).send({
-//             status: err
-//         })
-//     })
-// }
-
 const login = async (req, res) => {
     const { email, password } = req.body; 
+    console.log(email, password);
 
     const userFound = await User.findOne({ email: email }).exec();
     if (!userFound) return res.sendStatus(401);
@@ -56,34 +36,55 @@ const login = async (req, res) => {
     }
 }
 
-const refreshToken = (req, res) => {
+const refreshToken = async (req, res) => {
     const cookies = req.cookies;
-    console.log('hit')
-    console.log(cookies);
     if (!cookies?.jwt) return res.sendStatus(401);
     const refreshToken = cookies.jwt;
-    
-    const foundUser = User.findOne({
-        where: { refreshToken: refreshToken},
-    });
-    if (!foundUser) return res.sendStatus(403);
+
+    const userFound = await User.findOne({ refreshToken }).exec();
+    if (!userFound) return res.sendStatus(403);
     jwt.verify(
         refreshToken,
-        process.env.REFRESH_TOKEN_SECRET || '2626',
+        process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
+            if (err || userFound.username !== decoded.username) return res.sendStatus(403);
+            const roles = Object.values(userFound.roles);
             const accessToken = jwt.sign(
-                { "email": decoded.email },
-                process.env.ACCESS_TOKEN_SECRET || '1515',
-                { expiresIn: '30s' }
+                {
+                    "userInfo": {
+                        "email": decoded.email,
+                        "roles": roles
+                    }
+                },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: '10s' }
             );
-            res.json({ accessToken })
+            res.json({ roles, accessToken })
         }
     );
 }
 
+const register = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ 'message': 'email and password are required.' });
+
+    const duplicate = await User.findOne({ email: email }).exec();
+    if (duplicate) return res.sendStatus(409); //Conflict 
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await User.create({
+            "email": email,
+            "password": hashedPassword
+        });
+        res.status(201).json({ 'success': `${email} created!` });
+    } catch (err) {
+        res.status(500).json({ 'message': err.message });
+    }
+}
+
 module.exports = {
-    // getSocialEmail,
     login,
     refreshToken,
+    register,
 }

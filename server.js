@@ -42,39 +42,3 @@ mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
-
-
-
-// const path = require('path');
-// const sequelize = require('./config');
-// const bodyParser = require('body-parser');
-
-// app.use(
-//     cors({
-//         origin: true,
-//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//         credentials: true,
-//     })
-// );
-
-// app.use(
-//     bodyParser.json({
-//         verify: (req, res, buf, encoding) => {
-//             try {
-//                 JSON.parse(buf);
-//             } catch (e) {
-//                 res.status(404).send({
-//                     status: 'error',
-//                     description: 'Invalid JSON',
-//                 });
-//                 throw Error('Invalid JSON');
-//             }
-//         },
-//     })
-// );
-
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// sequelize.sync({ force: false }).then(() => {
-//     app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
-// });

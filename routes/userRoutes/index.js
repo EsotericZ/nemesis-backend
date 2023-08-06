@@ -4,7 +4,6 @@ const ROLES = require('../../config/roles');
 const verifyRoles = require('../../middleware/verifyRoles');
 
 router.route('/')
-    .get(userController.getAllUsers);
-    // .get(verifyRoles(ROLES.admin), userController.getAllUsers);
+    .get(verifyRoles(ROLES.Admin), userController.getAllUsers);
 
 module.exports = router;
