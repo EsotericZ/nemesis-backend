@@ -1,4 +1,5 @@
 const User = require('../models/User');
+// const User = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
@@ -11,11 +12,15 @@ const login = async (req, res) => {
     const passwordCheck = await bcrypt.compare(password, userFound.password);
     if (passwordCheck) {
         const roles = Object.values(userFound.roles).filter(Boolean);
+        const ranks = Object.values(userFound.ranks).filter(Boolean);
         const accessToken = jwt.sign(
             {
                 "userInfo": {
                     "email": userFound.email,
-                    "roles": roles
+                    "roles": roles,
+                    "firstName": userFound.firstName,
+                    "lastName": userFound.lastName,
+                    "ranks": ranks,
                 }
             },
             process.env.ACCESS_TOKEN_SECRET,
@@ -108,11 +113,15 @@ const refreshToken = async (req, res) => {
             }
             if (err || userFound.username !== decoded.username) return res.sendStatus(403);
             const roles = Object.values(userFound.roles);
+            const ranks = Object.values(userFound.ranks);
             const accessToken = jwt.sign(
                 {
                     "userInfo": {
                         "email": decoded.email,
-                        "roles": roles
+                        "roles": roles,
+                        "firstName": userFound.firstName,
+                        "lastName": userFound.lastName,
+                        "ranks": ranks,
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
@@ -140,14 +149,17 @@ const register = async (req, res) => {
     if (!email || !password) return res.status(400).json({ 'message': 'email and password are required.' });
 
     const duplicate = await User.findOne({ email: email }).exec();
-    if (duplicate) return res.sendStatus(409); //Conflict 
+    if (duplicate) return res.sendStatus(409);
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         await User.create({
             "email": email,
-            "password": hashedPassword
+            "password": hashedPassword,
+            "firstName": 'CJ',
+            "lastName": 'Sanders',
         });
+
         res.status(201).json({ 'success': `${email} created!` });
     } catch (err) {
         res.status(500).json({ 'message': err.message });
