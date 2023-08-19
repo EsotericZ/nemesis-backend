@@ -1,20 +1,11 @@
-const { Model, DataTypes, UUIDV4 } = require('sequelize');
-const sequelize = require('../config/index');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-class Match extends Model {};
-
-Match.init(
-    {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4,
-            primaryKey: true,
-        },
-    }, {
-        sequelize,
-        tableName: 'matches',
-        modelName: 'Match',
+const matchSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
     }
-);
+})
 
-module.exports = Match;
+module.exports = mongoose.model('Match', matchSchema);

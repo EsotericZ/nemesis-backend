@@ -1,24 +1,11 @@
-const { Model, DataTypes, UUIDV4 } = require('sequelize');
-const sequelize = require('../config/index');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-class Division extends Model {};
-
-Division.init(
-    {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4,
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-        },
-    }, {
-        sequelize,
-        tableName: 'divisions',
-        modelName: 'Division',
-        timestamps: false,
+const divisionSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
     }
-);
+})
 
-module.exports = Division;
+module.exports = mongoose.model('Division', divisionSchema);
