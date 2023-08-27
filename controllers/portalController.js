@@ -145,8 +145,8 @@ const refreshToken = async (req, res) => {
 
 
 const register = async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ 'message': 'email and password are required.' });
+    const { firstName, lastName, email, password } = req.body;
+    if (!firstName || !lastName || !email || !password) return res.status(400).json({ 'message': 'email and password are required.' });
 
     const duplicate = await User.findOne({ email: email }).exec();
     if (duplicate) return res.sendStatus(409);
@@ -156,8 +156,8 @@ const register = async (req, res) => {
         await User.create({
             "email": email,
             "password": hashedPassword,
-            "firstName": 'CJ',
-            "lastName": 'Sanders',
+            "firstName": firstName,
+            "lastName": lastName,
         });
 
         res.status(201).json({ 'success': `${email} created!` });
