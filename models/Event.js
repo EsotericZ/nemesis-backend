@@ -11,10 +11,10 @@ const eventSchema = new Schema({
         required: true,
     },
     startDate: {
-        type: String,
+        type: Date,
     },
     endDate: {
-        type: String,
+        type: Date,
     },
     divisions: [
         {
