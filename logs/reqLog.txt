@@ -1288,3 +1288,7 @@
 20230827	14:29:33	551943ca-6dfc-4b78-9df4-0750aadd6acf	GET	http://localhost:3000	/portal/refresh
 20230827	14:29:45	0d5f198b-2362-4a2f-8ac9-954d517bfcca	OPTIONS	http://localhost:3000	/portal/login
 20230827	14:29:45	6c5bfcc5-7514-4baf-bcb5-1dfcd426e2ef	POST	http://localhost:3000	/portal/login
+20230903	08:19:31	42370389-2592-485a-b438-47ab649e7264	OPTIONS	http://localhost:3000	/portal/login
+20230903	08:19:31	4d567bff-3e3e-470c-9fa1-d330e6bb8dec	POST	http://localhost:3000	/portal/login
+20230903	08:19:43	3d3e6460-3e3d-44da-ae32-5beb0c10edfe	OPTIONS	http://localhost:3000	/r2events
+20230903	08:19:43	4661903e-ba65-4d58-85c4-b0631aa40285	POST	http://localhost:3000	/r2events
