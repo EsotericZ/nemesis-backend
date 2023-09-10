@@ -2,18 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const r2eventSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    director: {
-        type: String,
-    },
-    club: {
+    eventName: {
         type: String,
         required: true,
     },
     location: {
+        type: String,
+        required: true,
+    },
+    club: {
         type: String,
         required: true,
     },
@@ -22,6 +19,9 @@ const r2eventSchema = new Schema({
     },
     endDate: {
         type: Date,
+    },
+    director: {
+        type: String,
     },
     status: {
         type: String,
@@ -33,7 +33,7 @@ const r2eventSchema = new Schema({
     description: {
         type: String,
     },
-    url: {
+    eventURL: {
         type: String,
     }
 });
