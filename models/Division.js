@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const divisionSchema = new Schema({
-    name: {
+    divisionName: {
         type: String,
+        required: true,
+    },
+    weightIndex: {
+        type: Schema.Types.ObjectId,
+        ref: 'WeightIndex',
         required: true,
     }
 })

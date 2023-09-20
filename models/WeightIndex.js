@@ -1,26 +1,19 @@
-const { Model, DataTypes, UUIDV4 } = require('sequelize');
-const sequelize = require('../config/index');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-class WeightIndex extends Model {};
+const weightIndexSchema = new Schema({
+    weightIndexName: {
+        type: String,
+        required: true,
+    },
+    weightIndexType: {
+        type: String,
+        required: true,
+    },
+    value: {
+        type: Number,
+        required: true,
+    },
+});
 
-WeightIndex.init(
-    {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: UUIDV4,
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-        },
-        value: {
-            type: DataTypes.INTEGER,
-        },
-    }, {
-        sequelize,
-        tableName: 'weightIndex',
-        modelName: 'WeightIndex',
-    }
-);
-
-module.exports = WeightIndex;
+module.exports = mongoose.model('WeightIndex', weightIndexSchema);
