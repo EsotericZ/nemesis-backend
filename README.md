@@ -11,3 +11,4 @@ add foreign keys
 add division types
 scoring types
 other changable details
+t > p > d/ed
