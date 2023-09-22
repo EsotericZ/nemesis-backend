@@ -1,44 +1,44 @@
-const { Division } = require('../models');
-
-const divisionData = [
+const seedDivisions = [
     {
-        id: 5001,
-        name: 'Open Singles',
-        TournamentId: 4001,
-        FormatId: 8001,
+        divisionType: 'Singles',
+        divisionName: 'Pro',
+        weightIndex: 1.0,
     },
     {
-        id: 5002,
-        name: 'A Singles',
-        TournamentId: 4001,
+        divisionType: 'Singles',
+        divisionName: 'Open',
+        weightIndex: 0.875,
     },
     {
-        id: 5003,
-        name: 'B Singles',
-        TournamentId: 4001,
+        divisionType: 'Singles',
+        divisionName: 'Elite',
+        weightIndex: 0.75,
     },
     {
-        id: 5004,
-        name: 'C Singles',
-        TournamentId: 4001,
+        divisionType: 'Singles',
+        divisionName: 'A',
+        weightIndex: 0.625,
     },
     {
-        id: 5005,
-        name: 'Open Doubles',
-        TournamentId: 4001,
+        divisionType: 'Singles',
+        divisionName: 'B',
+        weightIndex: 0.5,
     },
     {
-        id: 5006,
-        name: 'A Doubles',
-        TournamentId: 4001,
+        divisionType: 'Singles',
+        divisionName: 'C',
+        weightIndex: 0.375,
     },
     {
-        id: 5007,
-        name: 'B Doubles',
-        TournamentId: 4001,
+        divisionType: 'Singles',
+        divisionName: 'D',
+        weightIndex: 0.25,
+    },
+    {
+        divisionType: 'Singles',
+        divisionName: 'Beginner',
+        weightIndex: 0.125,
     },
 ]
-
-const seedDivisions = () => Division.bulkCreate(divisionData);
 
 module.exports = seedDivisions;
