@@ -1,20 +1,13 @@
 const mongoose = require('mongoose');
 require('dotenv').config({path:__dirname+'/./../.env'});
 
-const Division = require('../models/Division');
+const { Division } = require('../models');
 
 const seedDivisions = require('./divisionSeeds');
 
 mongoose.connect(process.env.DATABASE_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-})
-.then(() => {
-    console.log('Database Connected')
-    console.log('\n----- DATABASE CONNECTED -----\n');
-})
-.catch((error) => {
-    console.log(error)
 })
 
 const seedDB = async () => {
