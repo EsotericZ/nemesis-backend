@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+require('dotenv').config({path:__dirname+'/./../.env'});
+
 const Division = require('../models/Division');
 
 const seedDivisions = require('./divisionSeeds');
 
-mongoose.connect('mongodb+srv://nemesis:nemesis@cluster0.mflmlug.mongodb.net/NemesisDB?retryWrites=true&w=majority', {
+mongoose.connect(process.env.DATABASE_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
 })
