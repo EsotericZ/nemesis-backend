@@ -1,18 +1,25 @@
-const { Format } = require('../models');
-
-const formatData = [
+const seedFormats = [
     {
-        id: 8001,
-        name: 'Pool Play',
-        // DivisionId: 5001,
+        eventName: 'Compass',
     },
     {
-        id: 8002,
-        name: 'Single Elimination',
-        // DivisionId: 5002,
+        eventName: 'Cut Throat',
+    },
+    {
+        eventName: 'Double Elimination',
+    },
+    {
+        eventName: 'King of The Court',
+    },
+    {
+        eventName: 'Pool Play',
+    },
+    {
+        eventName: 'Round Robin',
+    },
+    {
+        eventName: 'Single Elimination',
     },
 ]
-
-const seedFormats = () => Format.bulkCreate(formatData);
 
 module.exports = seedFormats;
